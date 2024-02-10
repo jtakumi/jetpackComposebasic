@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">jetpack compose basic</string>
+    <string name="hello_world">Hello world.</string>
+    <string name="font_10">font_10sp</string>
+    <string name="font_30">font_30sp</string>
+    <string name="font_50">font_50sp</string>
+</resources>
