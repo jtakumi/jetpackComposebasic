@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -49,10 +50,10 @@ fun appScreen() {
         )
         Text(text = stringResource(id = R.string.font_50), color = Color.DarkGray, fontSize = 50.sp)
         Text(text = "")
-        Text(text = longStory, color = Color.LightGray)
-        Text(text = longStory, color = Color.Gray)
-        Text(text = longStory, color = Color.DarkGray)
-        Text(text = longStory, color = Color.Black)
+        Text(text = longStory, color = colorResource(id = R.color.cherry_rose))
+        Text(text = longStory, color = colorResource(id = R.color.weak_violet))
+        Text(text = longStory, color = colorResource(id = R.color.moegi))
+        Text(text = longStory, color = colorResource(id = R.color.dark_red))
         Text(text = stringResource(id = R.string.hello_world), fontSize = 16.sp, modifier = Modifier
             .background(
                 color = Color(0xff66cdaa),
@@ -66,7 +67,7 @@ fun appScreen() {
 fun showImage(){
     Image(
         painter = painterResource(id = R.drawable.icon_svg), contentDescription = "star image",
-        modifier =Modifier.border(1.dp, Color.LightGray),
+        modifier =Modifier.border(1.dp, color = colorResource(id = R.color.white)),
         contentScale = ContentScale.Crop,
     )
 }
