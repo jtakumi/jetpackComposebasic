@@ -3,6 +3,7 @@ package com.example.jetpackcomposebasic
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
@@ -12,6 +13,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -20,10 +23,14 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            Column {
                 appScreen()
+                showImage()
+
             }
         }
     }
+}
 
 @Composable
 fun appScreen() {
@@ -46,7 +53,20 @@ fun appScreen() {
         Text(text = longStory, color = Color.Gray)
         Text(text = longStory, color = Color.DarkGray)
         Text(text = longStory, color = Color.Black)
-        Text(text = stringResource(id = R.string.hello_world), fontSize = 16.sp, modifier = Modifier.background(color = Color(0xff66cdaa),
-            RoundedCornerShape(20.dp)).border(2.dp, Color.Black, RoundedCornerShape(20.dp)).padding(20.dp))
+        Text(text = stringResource(id = R.string.hello_world), fontSize = 16.sp, modifier = Modifier
+            .background(
+                color = Color(0xff66cdaa),
+                RoundedCornerShape(20.dp)
+            )
+            .border(2.dp, Color.Black, RoundedCornerShape(20.dp))
+            .padding(20.dp))
     }
+}
+@Composable
+fun showImage(){
+    Image(
+        painter = painterResource(id = R.drawable.icon_svg), contentDescription = "star image",
+        modifier =Modifier.border(1.dp, Color.LightGray),
+        contentScale = ContentScale.Crop,
+    )
 }
