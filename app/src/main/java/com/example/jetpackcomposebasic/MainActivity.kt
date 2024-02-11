@@ -6,11 +6,16 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -56,7 +61,7 @@ fun appScreen() {
         Text(text = longStory, color = colorResource(id = R.color.dark_red))
         Text(text = stringResource(id = R.string.hello_world), fontSize = 16.sp, modifier = Modifier
             .background(
-                color = Color(0xff66cdaa),
+                color = colorResource(id = R.color.deep_sky_blue),
                 RoundedCornerShape(20.dp)
             )
             .border(2.dp, Color.Black, RoundedCornerShape(20.dp))
@@ -65,9 +70,28 @@ fun appScreen() {
 }
 @Composable
 fun showImage(){
-    Image(
-        painter = painterResource(id = R.drawable.icon_svg), contentDescription = "star image",
-        modifier =Modifier.border(1.dp, color = colorResource(id = R.color.white)),
-        contentScale = ContentScale.Crop,
-    )
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Row{
+            Image(
+                painter = painterResource(id = R.drawable.icon_svg), contentDescription = "",
+                modifier = Modifier
+                    .size(108.dp)
+                    .border(1.dp, color = colorResource(id = R.color.moegi)),
+                contentScale = ContentScale.Crop,
+            )
+            Image(
+                painter = painterResource(id = R.drawable.triangle),
+                contentDescription ="",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.size(108.dp))
+        }
+        Text(text = stringResource(id = R.string.let_me_show),
+            color = colorResource(id = R.color.white),
+            fontSize = 16.sp,
+            modifier = Modifier.background(color = colorResource(id = R.color.deep_sky_blue)))
+    }
 }
