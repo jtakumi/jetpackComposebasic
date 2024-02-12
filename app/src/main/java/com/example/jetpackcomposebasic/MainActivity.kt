@@ -8,15 +8,18 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -38,10 +41,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Column {
-                appScreen()
-                buttonBackGround()
-                showImage()
-
+                inputText()
             }
         }
     }
@@ -94,14 +94,17 @@ fun showImage(){
                 painter = painterResource(id = R.drawable.icon_svg), contentDescription = "",
                 modifier = Modifier
                     .size(108.dp)
-                    .border(1.dp, color = colorResource(id = R.color.moegi)).clickable { countTapStar++ },
+                    .border(1.dp, color = colorResource(id = R.color.moegi))
+                    .clickable { countTapStar++ },
                 contentScale = ContentScale.Crop,
             )
             Image(
                 painter = painterResource(id = R.drawable.triangle),
                 contentDescription ="",
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.size(108.dp).clickable { countTapTriangle++ })
+                modifier = Modifier
+                    .size(108.dp)
+                    .clickable { countTapTriangle++ })
         }
         Text(text = stringResource(id = R.string.let_me_show),
             color = colorResource(id = R.color.white),
@@ -109,3 +112,16 @@ fun showImage(){
             modifier = Modifier.background(color = colorResource(id = R.color.deep_sky_blue)))
     }
 }
+@Composable
+fun inputText(){
+    Box(modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.TopCenter){
+        var userText by remember{ mutableStateOf("")}
+        OutlinedTextField(value =userText, onValueChange = {userText = it},
+            modifier = Modifier.padding(20.dp),
+            placeholder = {Text(text="input any word")},
+            maxLines = 5
+        )
+    }
+}
+
