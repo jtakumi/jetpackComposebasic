@@ -1,10 +1,13 @@
-# branches
+# introdaction of this repository
+jetpack composeで学習したことを記録する
 
-## master
+## branches
+
+### master
 公開用
 
-## develop
+### develop
 作業大元ブランチ
 
-## day_
+### day_
 作業した日ごとの差分
