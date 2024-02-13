@@ -41,7 +41,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Column {
+<<<<<<< HEAD
                 buttonBackGround()
+=======
+               buttonBackGround()
+>>>>>>> backGround
             }
         }
     }
