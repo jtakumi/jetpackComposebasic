@@ -5,4 +5,7 @@
     <string name="font_30">font_30sp</string>
     <string name="font_50">font_50sp</string>
     <string name="let_me_show"> Let me show images.</string>
+    <string name="announce_click">Would you like to click this button?</string>
+    <string name="click_button">Click me!</string>
+    <string name="clicked_button">Thank you for clicking.</string>
 </resources>
