@@ -56,7 +56,12 @@ fun pressJudge(){
     ) {
         var isButtonPressed by remember{ mutableStateOf(false)}
         QuestionComposable{
-            isButtonPressed=true
+            if(isButtonPressed){
+                isButtonPressed=false
+            }else{
+                isButtonPressed=true
+            }
+
         }
         if (isButtonPressed){
             ResponseComposable()
