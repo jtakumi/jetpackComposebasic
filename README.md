@@ -9,5 +9,17 @@ jetpack composeで学習したことを記録する
 ### develop
 作業大元ブランチ
 
+### showText
+文字列表示の公開用ブランチ
+
+### backGround
+背景色設定公開用ブランチ
+
+### clickableImage
+クリックするとカウントアップ画像公開用ブランチ
+
+### inputText
+キーボード入力可能なテキストボックス公開用ブランチ
+
 ### day_
 作業した日ごとの差分
