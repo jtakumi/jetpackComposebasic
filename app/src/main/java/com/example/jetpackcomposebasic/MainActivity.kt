@@ -41,27 +41,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Column {
-                inputText()
+                buttonBackGround()
             }
         }
     }
 }
-data class LongStory(val part:String,val textColor:Int,val textSize:Int)
 
-@Composable
-fun appScreen() {
-    val longStory = listOf(
-        LongStory("1年目 " ,R.color.cherry_rose,20),
-        LongStory("成長口実 ",R.color.weak_violet,20),
-        LongStory("重労働 ",R.color.moegi,20),
-             LongStory("鯱川畜木",R.color.dark_red,16)
-            )
-    LazyColumn {
-        items(longStory){story ->
-            Text(text = story.part, color = colorResource(id = story.textColor), fontSize = story.textSize.sp)
-        }
-    }
-}
 @Composable
 fun buttonBackGround(){
     Text(text = stringResource(id = R.string.hello_world), fontSize = 16.sp, modifier = Modifier
@@ -72,56 +57,3 @@ fun buttonBackGround(){
         .border(2.dp, Color.Black, RoundedCornerShape(20.dp))
         .padding(20.dp))
 }
-@Composable
-fun showImage(){
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceEvenly,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        var countTapStar by remember{
-            mutableStateOf(0)
-        }
-        var countTapTriangle by remember{
-            mutableStateOf(0)
-        }
-        Row{
-            Text(text = "Star:$countTapStar ,")
-            Text(text = "Triangle:$countTapTriangle")
-        }
-        Row{
-            Image(
-                painter = painterResource(id = R.drawable.icon_svg), contentDescription = "",
-                modifier = Modifier
-                    .size(108.dp)
-                    .border(1.dp, color = colorResource(id = R.color.moegi))
-                    .clickable { countTapStar++ },
-                contentScale = ContentScale.Crop,
-            )
-            Image(
-                painter = painterResource(id = R.drawable.triangle),
-                contentDescription ="",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .size(108.dp)
-                    .clickable { countTapTriangle++ })
-        }
-        Text(text = stringResource(id = R.string.let_me_show),
-            color = colorResource(id = R.color.white),
-            fontSize = 16.sp,
-            modifier = Modifier.background(color = colorResource(id = R.color.deep_sky_blue)))
-    }
-}
-@Composable
-fun inputText(){
-    Box(modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.TopCenter){
-        var userText by remember{ mutableStateOf("")}
-        OutlinedTextField(value =userText, onValueChange = {userText = it},
-            modifier = Modifier.padding(20.dp),
-            placeholder = {Text(text="input any word")},
-            maxLines = 5
-        )
-    }
-}
-
