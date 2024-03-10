@@ -14,9 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -24,6 +22,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,18 +36,17 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun showImage() {
+fun showImage(
+    starCountViewModel: StarCountViewModel = viewModel(),
+    triangleCountViewModel: TriangleCountViewModel = viewModel()
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        var countTapStar by remember {
-            mutableStateOf(0)
-        }
-        var countTapTriangle by remember {
-            mutableStateOf(0)
-        }
+        val countTapStar by starCountViewModel.count.observeAsState(0)
+        val countTapTriangle by triangleCountViewModel.count.observeAsState(0)
         Row {
             Text(
                 text = "Star:$countTapStar ,",
@@ -67,7 +65,7 @@ fun showImage() {
                 modifier = Modifier
                     .size(108.dp)
                     .border(1.dp, color = colorResource(id = R.color.moegi))
-                    .clickable { countTapStar++ },
+                    .clickable { starCountViewModel.countUp() },
                 contentScale = ContentScale.Crop,
             )
             Image(
@@ -76,7 +74,7 @@ fun showImage() {
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(108.dp)
-                    .clickable { countTapTriangle++ })
+                    .clickable { triangleCountViewModel.countUp() })
         }
     }
 }
