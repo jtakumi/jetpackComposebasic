@@ -44,6 +44,7 @@ fun showImage(
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        //viewModelの変数を結びつけながら初期値設定する
         val countTapStar by countViewModel.starCount.observeAsState(initial = 0)
         val countTapTriangle by countViewModel.triangleCount.observeAsState(initial = 0)
         Row {
