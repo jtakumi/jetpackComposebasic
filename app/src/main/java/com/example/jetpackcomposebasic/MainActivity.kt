@@ -37,16 +37,15 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun showImage(
-    starCountViewModel: StarCountViewModel = viewModel(),
-    triangleCountViewModel: TriangleCountViewModel = viewModel()
+    countViewModel: CountViewModel = viewModel()
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val countTapStar by starCountViewModel.count.observeAsState(0)
-        val countTapTriangle by triangleCountViewModel.count.observeAsState(0)
+        val countTapStar by countViewModel.starCount.observeAsState(initial = 0)
+        val countTapTriangle by countViewModel.triangleCount.observeAsState(initial = 0)
         Row {
             Text(
                 text = "Star:$countTapStar ,",
@@ -65,7 +64,7 @@ fun showImage(
                 modifier = Modifier
                     .size(108.dp)
                     .border(1.dp, color = colorResource(id = R.color.moegi))
-                    .clickable { starCountViewModel.countUp() },
+                    .clickable { countViewModel.starCountUp() },
                 contentScale = ContentScale.Crop,
             )
             Image(
@@ -74,7 +73,7 @@ fun showImage(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(108.dp)
-                    .clickable { triangleCountViewModel.countUp() })
+                    .clickable { countViewModel.triangleCountUp() })
         }
     }
 }
