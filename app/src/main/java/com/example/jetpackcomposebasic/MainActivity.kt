@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -41,42 +43,46 @@ class MainActivity : ComponentActivity() {
 fun showImage(
     countViewModel: CountViewModel = viewModel()
 ) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
+    Surface(
+        color = MaterialTheme.colorScheme.background
     ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
 
-        //viewModelの変数を結びつけながら初期値設定する
-        val countTapStar by countViewModel.starCount.observeAsState(initial = 0)
-        val countTapTriangle by countViewModel.triangleCount.observeAsState(initial = 0)
-        Row {
-            Text(
-                text = "Star:$countTapStar ,",
-                fontSize = 16.sp,
-                color = colorResource(id = R.color.cherry_rose)
-            )
-            Text(
-                text = "Triangle:$countTapTriangle",
-                fontSize = 16.sp,
-                color = colorResource(id = R.color.moegi)
-            )
-        }
-        Row {
-            Image(
-                painter = painterResource(id = R.drawable.icon_svg), contentDescription = "",
-                modifier = Modifier
-                    .size(108.dp)
-                    .border(1.dp, color = colorResource(id = R.color.moegi))
-                    .clickable { countViewModel.starCountUp() },
-                contentScale = ContentScale.Crop,
-            )
-            Image(
-                painter = painterResource(id = R.drawable.triangle),
-                contentDescription = "",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .size(108.dp)
-                    .clickable { countViewModel.triangleCountUp() })
+            //viewModelの変数を結びつけながら初期値設定する
+            val countTapStar by countViewModel.starCount.observeAsState(initial = 0)
+            val countTapTriangle by countViewModel.triangleCount.observeAsState(initial = 0)
+            Row {
+                Text(
+                    text = "Star:$countTapStar ,",
+                    fontSize = 16.sp,
+                    color = colorResource(id = R.color.cherry_rose)
+                )
+                Text(
+                    text = "Triangle:$countTapTriangle",
+                    fontSize = 16.sp,
+                    color = colorResource(id = R.color.moegi)
+                )
+            }
+            Row {
+                Image(
+                    painter = painterResource(id = R.drawable.icon_svg), contentDescription = "",
+                    modifier = Modifier
+                        .size(108.dp)
+                        .border(1.dp, color = colorResource(id = R.color.moegi))
+                        .clickable { countViewModel.starCountUp() },
+                    contentScale = ContentScale.Crop,
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.triangle),
+                    contentDescription = "",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(108.dp)
+                        .clickable { countViewModel.triangleCountUp() })
+            }
         }
     }
 }
