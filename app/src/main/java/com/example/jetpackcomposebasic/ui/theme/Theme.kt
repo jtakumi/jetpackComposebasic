@@ -1,68 +1,15 @@
-package com.example.reply.ui.theme
+package com.example.jetpackcomposebasic.ui.theme
 
+import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import com.example.jetpackcomposebasic.ui.theme.android_dark_background
-import com.example.jetpackcomposebasic.ui.theme.android_dark_error
-import com.example.jetpackcomposebasic.ui.theme.android_dark_errorContainer
-import com.example.jetpackcomposebasic.ui.theme.android_dark_inverseOnSurface
-import com.example.jetpackcomposebasic.ui.theme.android_dark_inversePrimary
-import com.example.jetpackcomposebasic.ui.theme.android_dark_inverseSurface
-import com.example.jetpackcomposebasic.ui.theme.android_dark_onBackground
-import com.example.jetpackcomposebasic.ui.theme.android_dark_onError
-import com.example.jetpackcomposebasic.ui.theme.android_dark_onErrorContainer
-import com.example.jetpackcomposebasic.ui.theme.android_dark_onPrimary
-import com.example.jetpackcomposebasic.ui.theme.android_dark_onPrimaryContainer
-import com.example.jetpackcomposebasic.ui.theme.android_dark_onSecondary
-import com.example.jetpackcomposebasic.ui.theme.android_dark_onSecondaryContainer
-import com.example.jetpackcomposebasic.ui.theme.android_dark_onSurface
-import com.example.jetpackcomposebasic.ui.theme.android_dark_onSurfaceVariant
-import com.example.jetpackcomposebasic.ui.theme.android_dark_onTertiary
-import com.example.jetpackcomposebasic.ui.theme.android_dark_onTertiaryContainer
-import com.example.jetpackcomposebasic.ui.theme.android_dark_outline
-import com.example.jetpackcomposebasic.ui.theme.android_dark_outlineVariant
-import com.example.jetpackcomposebasic.ui.theme.android_dark_primary
-import com.example.jetpackcomposebasic.ui.theme.android_dark_primaryContainer
-import com.example.jetpackcomposebasic.ui.theme.android_dark_scrim
-import com.example.jetpackcomposebasic.ui.theme.android_dark_secondary
-import com.example.jetpackcomposebasic.ui.theme.android_dark_secondaryContainer
-import com.example.jetpackcomposebasic.ui.theme.android_dark_surface
-import com.example.jetpackcomposebasic.ui.theme.android_dark_surfaceTint
-import com.example.jetpackcomposebasic.ui.theme.android_dark_surfaceVariant
-import com.example.jetpackcomposebasic.ui.theme.android_dark_tertiary
-import com.example.jetpackcomposebasic.ui.theme.android_dark_tertiaryContainer
-import com.example.jetpackcomposebasic.ui.theme.android_light_background
-import com.example.jetpackcomposebasic.ui.theme.android_light_error
-import com.example.jetpackcomposebasic.ui.theme.android_light_errorContainer
-import com.example.jetpackcomposebasic.ui.theme.android_light_inverseOnSurface
-import com.example.jetpackcomposebasic.ui.theme.android_light_inversePrimary
-import com.example.jetpackcomposebasic.ui.theme.android_light_inverseSurface
-import com.example.jetpackcomposebasic.ui.theme.android_light_onBackground
-import com.example.jetpackcomposebasic.ui.theme.android_light_onError
-import com.example.jetpackcomposebasic.ui.theme.android_light_onErrorContainer
-import com.example.jetpackcomposebasic.ui.theme.android_light_onPrimary
-import com.example.jetpackcomposebasic.ui.theme.android_light_onPrimaryContainer
-import com.example.jetpackcomposebasic.ui.theme.android_light_onSecondary
-import com.example.jetpackcomposebasic.ui.theme.android_light_onSecondaryContainer
-import com.example.jetpackcomposebasic.ui.theme.android_light_onSurface
-import com.example.jetpackcomposebasic.ui.theme.android_light_onSurfaceVariant
-import com.example.jetpackcomposebasic.ui.theme.android_light_onTertiary
-import com.example.jetpackcomposebasic.ui.theme.android_light_onTertiaryContainer
-import com.example.jetpackcomposebasic.ui.theme.android_light_outline
-import com.example.jetpackcomposebasic.ui.theme.android_light_outlineVariant
-import com.example.jetpackcomposebasic.ui.theme.android_light_primary
-import com.example.jetpackcomposebasic.ui.theme.android_light_primaryContainer
-import com.example.jetpackcomposebasic.ui.theme.android_light_scrim
-import com.example.jetpackcomposebasic.ui.theme.android_light_secondary
-import com.example.jetpackcomposebasic.ui.theme.android_light_secondaryContainer
-import com.example.jetpackcomposebasic.ui.theme.android_light_surface
-import com.example.jetpackcomposebasic.ui.theme.android_light_surfaceTint
-import com.example.jetpackcomposebasic.ui.theme.android_light_surfaceVariant
-import com.example.jetpackcomposebasic.ui.theme.android_light_tertiary
-import com.example.jetpackcomposebasic.ui.theme.android_light_tertiaryContainer
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
 
 
 private val LightColors = lightColorScheme(
@@ -131,18 +78,32 @@ private val DarkColors = darkColorScheme(
 )
 
 @Composable
-fun AppTheme(
+fun JetpackComposeBasicTheme(
     useDarkTheme: Boolean = isSystemInDarkTheme(),
+    dynamicColor: Boolean = true,
     content: @Composable() () -> Unit
 ) {
-    val colors = if (useDarkTheme) {
+    val currentColors = if (useDarkTheme) {
         DarkColors
     } else {
         LightColors
     }
+    val currentView = LocalView.current
+    if (currentView.isInEditMode.not()) {
+        SideEffect {
+            val contextActivity = (currentView.context as Activity).window
+            contextActivity.statusBarColor = currentColors.primary.toArgb()
+            WindowCompat.getInsetsController(
+                contextActivity,
+                currentView
+            ).isAppearanceLightStatusBars =
+                useDarkTheme
+        }
+    }
 
     MaterialTheme(
-        colorScheme = colors,
+        typography = Typography,
+        colorScheme = currentColors,
         content = content
     )
 }
