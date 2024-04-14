@@ -12,7 +12,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 
-private val LightColors = lightColorScheme(
+private val LightColorScheme = lightColorScheme(
     primary = android_light_primary,
     onPrimary = android_light_onPrimary,
     primaryContainer = android_light_primaryContainer,
@@ -45,7 +45,7 @@ private val LightColors = lightColorScheme(
 )
 
 
-private val DarkColors = darkColorScheme(
+private val DarkColorScheme = darkColorScheme(
     primary = android_dark_primary,
     onPrimary = android_dark_onPrimary,
     primaryContainer = android_dark_primaryContainer,
@@ -84,9 +84,9 @@ fun JetpackComposeBasicTheme(
     content: @Composable() () -> Unit
 ) {
     val currentColors = if (useDarkTheme) {
-        DarkColors
+        DarkColorScheme
     } else {
-        LightColors
+        LightColorScheme
     }
     val currentView = LocalView.current
     if (currentView.isInEditMode.not()) {
