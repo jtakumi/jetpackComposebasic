@@ -25,14 +25,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.jetpackcomposebasic.ui.theme.JetpackComposeBasicTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Column {
-
-                showImage()
+            Surface {
+                JetpackComposeBasicTheme {
+                    Column {
+                        ShowImage()
+                    }
+                }
             }
         }
     }
@@ -40,7 +44,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 
-fun showImage(
+fun ShowImage(
     countViewModel: CountViewModel = viewModel()
 ) {
     Surface(
